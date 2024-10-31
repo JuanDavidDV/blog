@@ -1,6 +1,6 @@
 class BlogPostsController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]  # I user is not sign in it will redirect them to new_user_session_path by default
-  before_action :set_blog_post, except: [:index, :new, :create]
+  before_action :authenticate_user!, except: [ :index, :show ]  # If user is not sign in it will redirect them to new_user_session_path by default
+  before_action :set_blog_post, except: [ :index, :new, :create ]
 
   def index
     @blog_posts = user_signed_in? ? BlogPost.sorted : BlogPost.published.sorted
