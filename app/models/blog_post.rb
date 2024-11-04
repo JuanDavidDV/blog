@@ -4,7 +4,7 @@ class BlogPost < ApplicationRecord
   validates :title, presence: true
   validates :content, presence: true
 
-  scope :sorted, -> { order(arel_table[:published_at].desc.nulls_last).order(updated_at: :desc) }
+  scope :sorted, -> { order(arel_table[:published_at].desc.nulls_first).order(updated_at: :desc) }
   scope :draft, -> { where(published_at: nil) } # Has not been set any time for an action
   scope :published, -> { where("published_at <= ?", Time.current) } # Published time is <= to current time
   scope :schedule, -> { where("published_at > ?", Time.current) }
