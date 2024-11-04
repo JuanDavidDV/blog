@@ -13,14 +13,28 @@
   </div>
 
   <div>
+    <%= form.label :cover_image %>
+    <% if blog_post.cover_image.present? %>
+      <div id="<%= dom_id(blog_post, :cover_image) %>">
+        <%= image_tag blog_post.cover_image, class: "w-1/2"%>
+        <%= link_to "Remove cover image", blog_post_cover_image_path(blog_post), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "rounded-lg font-semi-bold p-4 text-center text-red-600 bg-gray-100 hover:bg-gray-400" %>
+      </div>
+    <% end %>
+    <br/>
+    <div class="mt-10">
+      <%= form.file_field :cover_image %>
+    </div>
+  </div>
+
+  <div>
     <%= form.label :content %>
     <%= form.rich_text_area :content %>
   </div>
 
-  <div>
+  <div class="mb-4">
     <%= form.label :published_at %>
     <%= form.datetime_select :published_at, include_blank: true %>
   </div>
 
-  <%= form.button %>
+  <%= form.button class: "rounded-lg font-semi-bold p-2 text-center bg-gray-100 hover:bg-gray-400 mb-4" %>
 <% end %>
